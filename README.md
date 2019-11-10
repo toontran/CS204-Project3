@@ -1,7 +1,7 @@
 # CS204-Project3
 Final Project!
 
-# Goal: 
+# Goal 
 Reproducible
 
 Testible
