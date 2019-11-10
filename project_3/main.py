@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import os
-import sys
-import bridges
-import math
-=======
 from bridges.bridges import *
 from bridges.avl_tree_element import *
 import sys
@@ -19,4 +13,3 @@ class AVL_Tree:
 	def create_node(self, idx, item):
 		""" create a new tree node """
 		pass
->>>>>>> arshnoor
