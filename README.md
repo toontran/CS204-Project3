@@ -77,7 +77,7 @@ source ~/env/bin/activate
 and install packages
 
 ```
-pip install -r requirements.txt
+pip install -r requirements.txt --user
 ```
 
 ## Running the tests
