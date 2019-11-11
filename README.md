@@ -10,7 +10,30 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-Setup code 
+#### First time setting up Git
+
+Tell Git who you are
+
+```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+Generate SSH key (To make connection with Git)
+
+```
+ssh-keygen -t rsa
+```
+
+then see the SSH key
+
+```
+cat ~/.ssh/id_rsa.pub
+```
+
+Copy the key (including the "ssh-rsa" at the beginning)
+
+Click on your avatar, click on Settings near the end, click on SSH and GPG keys tab, click New SSH key, paste the key and click Add SSH key
 
 Clone Project from Github
 
@@ -18,27 +41,18 @@ Clone Project from Github
 git clone git@github.com:sontungtran/CS204-Project3.git
 ```
 
-Set remote
+Create new branch & navigate into your branch
 
 ```
-Give examples
-```
-
-Create new branch
-
-```
-Give examples
-```
-
-Navigate into your branch
-
-```
-Give examples
+git checkout -b [your-name]
 ```
 
 and check with ```git status```
 
-Push your version with
+#### Make sure you run ```git pull``` before editing anything
+
+#### After your work is done
+Push to your branch with
 
 ```
 git add -A
