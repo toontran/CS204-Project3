@@ -10,10 +10,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
+Setup code 
+
 Clone Project from Github
 
 ```
-Give examples
+git clone git@github.com:sontungtran/CS204-Project3.git
 ```
 
 Set remote
@@ -64,7 +66,7 @@ Explain how to run the automated tests for this system (TODO)
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+Explain what these tests test and why (TODO)
 
 ```
 Give an example
@@ -90,4 +92,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Thanks Prof. Dancy for giving us 1 week to setup all these
 * Inspiration: Not to get C for the Final Project
-* Look at dis GIF! ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+* Look at dis GIF!
+
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
