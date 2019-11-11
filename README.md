@@ -93,8 +93,6 @@ pip install -r requirements.txt --user
 
 [Sam Citron](https://github.com/Sam-Citron)
 
-List of [contributors](https://github.com/sontungtran/CS204-Project3/graphs/contributors) who participated in this project.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
