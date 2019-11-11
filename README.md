@@ -85,6 +85,10 @@ pip install -r requirements.txt --user
 ## Running the tests (TODO)
 
 ## Authors
+[Tung Tran](https://github.com/sontungtran)
+[Arsh Noor Armin]()
+[Amanda Christy]()
+[Sam Citron]()
 
 List of [contributors](https://github.com/sontungtran/CS204-Project3/graphs/contributors) who participated in this project.
 
