@@ -88,7 +88,7 @@ List of [contributors](https://github.com/sontungtran/CS204-Project3/graphs/cont
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+## Acknowledgements
 
 * Thanks Prof. Dancy for giving us 1 week to setup all these
 * Inspiration: Not to get C for the Final Project
