@@ -80,6 +80,8 @@ and install packages
 pip install -r requirements.txt --user
 ```
 
+## Bridges [Documentation](http://bridgesuncc.github.io/doc/python-api/1.0/html/namespace_bridges.html)
+
 ## Running the tests
 
 Explain how to run the automated tests for this system (TODO)
