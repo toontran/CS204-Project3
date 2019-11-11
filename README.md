@@ -46,12 +46,18 @@ git commit -m 'Commit Message'
 git push origin [your branch's name]
 ```
 
-### Installing
+### Setup Virtual Environment
+
+Create your own virtual environment
+
+```
+python -m venv ~/[your-virtual-environment-name]
+```
 
 Activate virtual environment with
 
 ```
-source env/bin/activate
+source ~/env/bin/activate
 ```
 
 and install packages
