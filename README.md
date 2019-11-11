@@ -82,25 +82,7 @@ pip install -r requirements.txt --user
 
 ## Bridges [Documentation](http://bridgesuncc.github.io/doc/python-api/1.0/html/namespace_bridges.html)
 
-## Running the tests
-
-Explain how to run the automated tests for this system (TODO)
-
-### Break down into end to end tests
-
-Explain what these tests test and why (TODO)
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+## Running the tests (TODO)
 
 ## Authors
 
