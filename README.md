@@ -6,9 +6,29 @@ Final Project for CSCI 204!
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Setup Git
+### Setup Virtual Environment
 
-What things you need to install the software and how to install them
+Create your own virtual environment
+
+```
+python -m venv ~/[your-virtual-environment-name]
+```
+
+Activate virtual environment with
+
+```
+source ~/env/bin/activate
+```
+
+and install packages
+
+```
+pip install -r requirements.txt --user
+```
+
+### Setting up Git
+
+It might be lengthy at first but you'll get used to it over time
 
 #### First time setting up Git
 
@@ -58,26 +78,6 @@ Push to your branch with
 git add -A
 git commit -m 'Commit Message'
 git push origin [your branch's name]
-```
-
-### Setup Virtual Environment
-
-Create your own virtual environment
-
-```
-python -m venv ~/[your-virtual-environment-name]
-```
-
-Activate virtual environment with
-
-```
-source ~/env/bin/activate
-```
-
-and install packages
-
-```
-pip install -r requirements.txt --user
 ```
 
 ## Bridges [Documentation](http://bridgesuncc.github.io/doc/python-api/1.0/html/namespace_bridges.html)
