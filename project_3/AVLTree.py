@@ -2,6 +2,12 @@ from bridges.bridges import *
 from bridges.avl_tree_element import *
 import sys
 
+
+# Remember to change these params before running the script
+YOUR_USER_ID = 'XXX'
+YOUR_API_KEY = 'XXXXXXXXXXX'
+
+
 class Node(AVLTreeElement):
     ''' 
     Inherits from class AVLTreeElement
@@ -16,8 +22,16 @@ class Node(AVLTreeElement):
 
 
 class AVLTree:
-	def __init__(self, title='AVLTree', descr='Self-balancing Tree'):
-		#add a title and description to the tree
+    ''' AVL Tree (Self-balancing Tree) '''
+
+	def __init__(self, 
+	             assignment_number=0, 
+	             title='AVLTree', 
+	             descr='Self-balancing Tree'):
+	                      
+		# Create bridges instance
+		self.bridges = Bridges(assignment_number, YOUR_USER_ID, 
+		                       YOUR_API_KEY)
 		bridges.set_title(title)
 		bridges.set_description(descr)
 		
@@ -36,7 +50,7 @@ class AVLTree:
         else:
             self._insert(self.root, key, data)
             
-    def _insert(self, parent, key, data):
+    def _insert(self, parent, key, data): #TODO
         ''' Recursively insert & balance the tree 
         
         :param parent: The parent node we start from
@@ -50,7 +64,7 @@ class AVLTree:
     def level_order(self):
         ''' Level order traversal 
         
-        To print the tree out, level by level 
+        Used to print the tree out, level by level 
         '''
         return self._level_order([self.root])
         
@@ -68,6 +82,11 @@ class AVLTree:
                 next_level_nodes.append(node.right)
                 
         return self._level_order(next_level_nodes, result=result)
+        
+    def visualize(self):
+        ''' Upload the graph onto Bridges '''
+        bridges.set_data_structure(self.root)
+        bridges.visualize()
         
         
 # If run this file (e.g. python3 AVLTree.py)
