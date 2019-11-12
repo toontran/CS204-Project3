@@ -80,7 +80,9 @@ git commit -m 'Commit Message'
 git push origin [your branch's name]
 ```
 
-## Bridges [Documentation](http://bridgesuncc.github.io/doc/python-api/1.0/html/namespace_bridges.html)
+## Bridges 
+[Documentation](http://bridgesuncc.github.io/doc/python-api/1.0/html/namespace_bridges.html)
+[Example](http://bridgesuncc.github.io/tutorials/AVL.html)
 
 ## Running the tests (TODO)
 
