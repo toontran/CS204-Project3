@@ -16,27 +16,36 @@ class Node(AVLTreeElement):
     :param num: number of nodes with the same key
     '''
     
-	def __init__(self, key, data):
-	    super().__init__(key, data)
-	    self.num = 1
+    def __init__(self, key, data):
+    
+        if str( type(data) ) != "<class 'list'>":
+            self.data = [data]
+    
+        super().__init__(key, data)
+        self.num = 1
+        self.level = 0
+        
+    def append(self, data):
+        self.num += 1
+        self.data.extend(data) 
 
 
 class AVLTree:
     ''' AVL Tree (Self-balancing Tree) '''
 
-	def __init__(self, 
-	             assignment_number=0, 
-	             title='AVLTree', 
-	             descr='Self-balancing Tree'):
-	                      
-		# Create bridges instance
-		self.bridges = Bridges(assignment_number, YOUR_USER_ID, 
-		                       YOUR_API_KEY)
-		bridges.set_title(title)
-		bridges.set_description(descr)
-		
-		self.root = None
-		
+    def __init__(self, 
+                 assignment_number=0, 
+                 title='AVLTree', 
+                 descr='Self-balancing Tree'):
+                          
+        # Create bridges instance
+        self.bridges = Bridges(assignment_number, YOUR_USER_ID, 
+                               YOUR_API_KEY)
+        self.bridges.set_title(title)
+        self.bridges.set_description(descr)
+        
+        self.root = None
+        
     def insert(self, key, data):
         ''' Insert a node into Tree 
         
@@ -50,16 +59,108 @@ class AVLTree:
         else:
             self._insert(self.root, key, data)
             
-    def _insert(self, parent, key, data): #TODO
+    def _insert(self, parent, key, data, grandparent=None): #TODO
         ''' Recursively insert & balance the tree 
         
         :param parent: The parent node we start from
         :param key: We use key to determine where to insert node at
         :param value: Any value to associate with the key
         
-        :return: ???
+        :return: num of levels of children the parent has
         '''
-        pass
+        # Insert and assign level number
+        if parent == None:
+            return 0
+            
+        if key == parent.key:
+            parent.append(data)
+            
+        elif key < parent.key:
+            if parent.left == None:
+                parent.left = Node(key, data)
+                parent.level = 1
+            else:
+                self._insert(parent.left, key, data, grandparent=parent)
+                if parent.right == None:
+                    parent.level = 1 + parent.left.level
+                else:
+                    parent.level = 1 + max(parent.left.level, parent.right.level)
+                    
+        else:
+            if parent.right == None:
+                parent.right = Node(key, data)
+                parent.level = 1
+            else:
+                self._insert(parent.right, key, data, grandparent=parent)
+                if parent.left == None:
+                    parent.level = 1 + parent.right.level
+                else:
+                    parent.level = 1 + max(parent.left.level, parent.right.level)
+                    
+        # Rotate if the difference between two children is 2 or more
+        
+        # Find balance factor
+        if parent.left == None and parent.right == None:
+            parent.balance_factor = 0
+        elif parent.left == None:
+            parent.balance_factor = parent.right.level + 1
+        elif parent.right == None:
+            parent.balance_factor = -1 - parent.left.level
+        else:
+            parent.balance_factor = parent.right.level - \
+                                        parent.left.level 
+        
+        if parent.balance_factor < -1 and parent.left.balance_factor < 0:
+            # Case 1
+            parent = self.rotate_right(grandparent, parent)
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor < -1 and parent.left.balance_factor > 0:
+            # Case 2
+            parent.left = self.rotate_left(parent, parent.left)
+            parent = self.rotate_right(grandparent, parent)
+            parent.level += 1
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor > 1 and parent.right.balance_factor > 0:
+            # Case 3
+            parent = self.rotate_left(grandparent, parent)
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor > 1 and parent.right.balance_factor < 0:
+            # Case 4
+            parent.right = self.rotate_right(parent, parent.right)
+            parent = self.rotate_left(grandparent, parent)
+            parent.level += 1
+            if grandparent == None:
+                self.root = parent
+            
+            
+    def rotate_right(self, grandparent, parent):
+        original_parent = parent
+        parent = parent.left
+        temp = parent.right
+        parent.right = original_parent
+        original_parent.left = temp
+        print(temp)
+        
+        if grandparent != None:
+            if grandparent.left == original_parent: grandparent.left = parent
+            else: grandparent.right = parent      
+        return parent
+            
+    def rotate_left(self, grandparent, parent):
+        original_parent = parent
+        parent = parent.right
+        temp = parent.left
+        parent.left = original_parent
+        original_parent.right = temp
+        print(temp)
+        
+        if grandparent != None:
+            if grandparent.left == original_parent: grandparent.left = parent
+            else: grandparent.right = parent
+        return parent
         
     def level_order(self):
         ''' Level order traversal 
@@ -75,7 +176,7 @@ class AVLTree:
         next_level_nodes = []
         result += '||'
         for node in current_level_nodes:
-            result += node.data + ','
+            result += '{} ,'.format(node.key)
             if node.left != None:
                 next_level_nodes.append(node.left)
             if node.right != None:
@@ -85,8 +186,8 @@ class AVLTree:
         
     def visualize(self):
         ''' Upload the graph onto Bridges '''
-        bridges.set_data_structure(self.root)
-        bridges.visualize()
+        self.bridges.set_data_structure(self.root)
+        self.bridges.visualize()
         
         
 # If run this file (e.g. python3 AVLTree.py)
@@ -136,6 +237,6 @@ if __name__ == '__main__':
     tree.insert(4, 'is')
     print( tree.level_order() ) # Should be ||5, ||3, 10, ||2, 4, 20
     
-    tree.insert(15, 'not')
+    tree.insert(30, 'not')
     print( tree.level_order() ) # Should be ||5, ||3, 20, ||2, 4, 10, 30 
     
