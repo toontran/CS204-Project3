@@ -11,19 +11,19 @@ These instructions will get you a copy of the project up and running on your loc
 Create your own virtual environment
 
 ```
-python -m venv ~/[your-virtual-environment-name]
+python3 -m venv ~/your-virtual-environment-name
 ```
 
 Activate virtual environment with
 
 ```
-source ~/env/bin/activate
+source ~/your-virtual-environment-name/bin/activate
 ```
 
 and install packages
 
 ```
-pip install -r requirements.txt --user
+python3 -m pip install -r requirements.txt --user
 ```
 
 ### Setting up Git
@@ -64,7 +64,7 @@ git clone git@github.com:sontungtran/CS204-Project3.git
 Create new branch & navigate into your branch
 
 ```
-git checkout -b [your-name]
+git checkout -b your-virtual-environment-name
 ```
 
 and check with ```git status```
