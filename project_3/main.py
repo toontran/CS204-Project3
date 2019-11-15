@@ -1,35 +1,48 @@
-import os
-from utils import *
+import pandas as pd 
 from AVLTree import *
-
-
-FILE_NAME = 'Chicago_Crimes_2018-2019_Train.csv'
-ROOT = os.path.dirname(os.getcwd()) + '/'
+from AVL_Dict2 import *
 
 
 class ChicagoCrimeFun:
 
-	def init(self):
-		"""
-		Constructor that could do several things, including read in your training data
-		"""
-		self.data = read_file( ROOT + FILE_NAME )
+    def __init__(self):
+        self.data = pd.read_csv("Chicago_Crimes_2018-2019_Train.csv")
+       
 
-	def build_loc_priority(self):
-		"""
-		Should be used to build your location-priority AVL tree
-		"""
-		pass
+    def build_loc_priority(self):
+        """
+        Should be used to build your location-priority AVL tree
+        """
+        self.loc_tree = AVL_Tree()
+        self.root = None
+        d = self.data['Beat'].value_counts()
 
-	def build_crime_priority(self):
-		"""
-		Should be used to build your location-priority AVL tree
-		"""
-		pass
+        for key, value in d.iteritems():  
+            self.root = self.loc_tree.insert( self.root, key, value )  
 
-	def decide_next_patrol(self, new_request=None):
-		"""
-		You will need this later, but I'm just giving this here for you to keep it as a placeholder
-		"""
-		pass
+        self.loc_tree.visualize(self.root)
+
+    def build_crime_priority(self):
+        """
+        Should be used to build your crime-priority AVL tree
+        """
+        self.crime_tree = AVL_Tree(assignment_number=1)
+        self.root = None
+        d = createDict()
+        for key in d:
+            
+            self.root = self.crime_tree.insert(self.root, key, d[key])
+          
+        self.crime_tree.visualize(self.root)
+
+    def decide_next_patrol(self, new_request=None):
+        """
+        You will need this later, but I'm just giving this here for you to keep it as a placeholder
+        """
+        pass
+
+c = ChicagoCrimeFun()
+c.build_crime_priority()
+c.build_loc_priority()
+
 
