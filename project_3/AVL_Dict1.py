@@ -5,7 +5,7 @@ BEAT = 10
 
 #read the data from the file and create a list of lists called "finalList"
 def readData():
-    with open('Chicago_Crimes_2018-2019_train.csv', 'r') as data:
+    with open('Chicago_Crimes_2018-2019_Train.csv', 'r') as data:
         reader = csv.reader(data)
         finalList = list(reader)
     return finalList
