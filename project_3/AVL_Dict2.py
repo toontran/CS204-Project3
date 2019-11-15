@@ -35,6 +35,3 @@ def printDict():
     for key, value in table1_dict.items():
         print(' {0:^20s} {1:^14,} '.format(key, value))
         count += 1
-
-table = createDict()
-print(table)

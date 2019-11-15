@@ -28,7 +28,7 @@ class ChicagoCrimeFun:
         """
         self.crime_tree = AVL_Tree(assignment_number=1)
         self.root = None
-        d = createDict()
+        d = create_crime()
         for key in d:
             
             self.root = self.crime_tree.insert( key, d[key] )
