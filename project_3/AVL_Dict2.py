@@ -34,4 +34,9 @@ def printDict():
     count = 0
     for key, value in table1_dict.items():
         print(' {0:^20s} {1:^14,} '.format(key, value))
-        count += 1
+       	count += 1
+       	
+if __name__ == '__main__':
+    d = create_crime()
+    for key in d:
+        print(key, ' ', d[key])

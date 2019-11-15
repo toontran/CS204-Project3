@@ -18,9 +18,6 @@ class Node(AVLTreeElement):
     
     def __init__(self, key, data):
     
-        if str( type(data) ) != "<class 'list'>":
-            self.data = [data]
-    
         super().__init__(key, data)
         self.num = 1
         self.height = 1
@@ -28,7 +25,6 @@ class Node(AVLTreeElement):
         
     def append(self, data):
         self.num += 1
-        self.data.extend(data) 
 
 
 class AVL_Tree:
@@ -71,10 +67,11 @@ class AVL_Tree:
         '''
         # Insert
         if parent == None:
-            return 
+            parent.num += 1
+            return
             
         if key == parent.key:
-            parent.append(data)
+            parent
             
         elif key < parent.key:
             if parent.left == None:
