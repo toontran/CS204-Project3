@@ -6,26 +6,6 @@ Final Project for CSCI 204!
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Setup Virtual Environment
-
-Create your own virtual environment
-
-```
-python3 -m venv ~/your-virtual-environment-name
-```
-
-Activate virtual environment with
-
-```
-source ~/your-virtual-environment-name/bin/activate
-```
-
-and install packages
-
-```
-python3 -m pip install -r requirements.txt --user
-```
-
 ### Setting up Git
 
 It might be lengthy at first but you'll get used to it over time
@@ -61,6 +41,12 @@ Clone Project from Github
 git clone git@github.com:sontungtran/CS204-Project3.git
 ```
 
+Navigate into the file
+
+```
+cd CS204-Project3
+```
+
 Create new branch & navigate into your branch
 
 ```
@@ -78,6 +64,26 @@ Push to your branch with
 git add -A
 git commit -m 'Commit Message'
 git push origin [your branch's name]
+```
+
+### Setup Virtual Environment
+
+Create your own virtual environment
+
+```
+python3 -m venv ~/your-virtual-environment-name
+```
+
+Activate virtual environment with
+
+```
+source ~/your-virtual-environment-name/bin/activate
+```
+
+and install packages
+
+```
+python3 -m pip install -r requirements.txt --user
 ```
 
 ## Bridges 
