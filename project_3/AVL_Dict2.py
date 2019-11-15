@@ -14,7 +14,7 @@ def readData():
     return finalList
 
 #create a Dictionary where the priority is the value and the "IUCR" is the key
-def createDict():
+def create_crime():
     finalList = readData()
     table1_dict = {}
     
@@ -25,7 +25,6 @@ def createDict():
     return table1_dict
 
 def printDict():
-    table1_dict = createDict()
     print(60*'-')
     print(11*'-', 'IUCR and their Priorities', 11*'-')
     print(60*'-')
@@ -37,3 +36,5 @@ def printDict():
         print(' {0:^20s} {1:^14,} '.format(key, value))
         count += 1
 
+table = createDict()
+print(table)
