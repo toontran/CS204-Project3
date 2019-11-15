@@ -59,7 +59,7 @@ class AVLTree:
         else:
             self._insert(self.root, key, data)
             
-    def _insert(self, parent, key, data, grandparent=None): #TODO
+    def _insert(self, parent, key, data, grandparent=None): 
         ''' Recursively insert & balance the tree 
         
         :param parent: The parent node we start from
