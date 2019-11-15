@@ -18,9 +18,9 @@ class ChicagoCrimeFun:
         d = self.data['Beat'].value_counts()
 
         for key, value in d.iteritems():  
-            self.root = self.loc_tree.insert( self.root, key, value )  
+            self.root = self.loc_tree.insert( key, value )  
 
-        self.loc_tree.visualize(self.root)
+        self.loc_tree.visualize()
 
     def build_crime_priority(self):
         """
@@ -31,9 +31,9 @@ class ChicagoCrimeFun:
         d = createDict()
         for key in d:
             
-            self.root = self.crime_tree.insert(self.root, key, d[key])
+            self.root = self.crime_tree.insert( key, d[key] )
           
-        self.crime_tree.visualize(self.root)
+        self.crime_tree.visualize()
 
     def decide_next_patrol(self, new_request=None):
         """

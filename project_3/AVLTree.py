@@ -8,152 +8,248 @@ YOUR_USER_ID = 'tungtran'
 YOUR_API_KEY = '361152011190'
 
 
-# Python code to insert a node in AVL tree 
-  
-# Generic tree node class 
-class Node(AVLTreeElement): 
-
-    def __init__(self, key, value): 
-        super().__init__(key, value)
+class Node(AVLTreeElement):
+    ''' 
+    Inherits from class AVLTreeElement
+    
+    Create another attribute "num"
+    :param num: number of nodes with the same key
+    '''
+    
+    def __init__(self, key, data):
+    
+        if str( type(data) ) != "<class 'list'>":
+            self.data = [data]
+    
+        super().__init__(key, data)
+        self.num = 1
         self.height = 1
-        self.label = str(value)
+        self.label = str(data)
+        
+    def append(self, data):
+        self.num += 1
+        self.data.extend(data) 
 
-  
-# AVL tree class which supports the  
-# Insert operation 
-class AVL_Tree(): 
-    def __init__(self, assignment_number=0):
-        self.bridges = Bridges(assignment_number, YOUR_USER_ID, YOUR_API_KEY)
-    # Recursive function to insert key in  
-    # subtree rooted with node and returns 
-    # new root of subtree. 
-    def insert(self, root, key, value): 
-      
-        if root == None: 
-            return Node(key, value) 
-        elif key < root.key: 
-            root.left = self.insert(root.left, key, value) 
-        elif key > root.key: 
-            root.right = self.insert(root.right, key, value)
-  
-        # Step 2 - Update the height of the  
-        # ancestor node 
-        root.height = 1 + max(self.getHeight(root.left), 
-                           self.getHeight(root.right)) 
-  
-        # Step 3 - Get the balance factor 
-        balance = self.getBalance(root) 
-  
-        # Step 4 - If the node is unbalanced,  
-        # then try out the 4 cases 
-        # Case 1 - Left Left 
-        if balance > 1 and key < root.left.key: 
-            return self.rightRotate(root) 
-  
-        # Case 2 - Right Right 
-        if balance < -1 and key > root.right.key: 
-            return self.leftRotate(root) 
-  
-        # Case 3 - Left Right 
-        if balance > 1 and key > root.left.key: 
-            root.left = self.leftRotate(root.left) 
-            return self.rightRotate(root) 
-  
-        # Case 4 - Right Left 
-        if balance < -1 and key < root.right.key: 
-            root.right = self.rightRotate(root.right) 
-            return self.leftRotate(root) 
-  
-        return root 
-  
-    def leftRotate(self, z): 
-  
-        y = z.right 
-        T2 = y.left 
-  
-        # Perform rotation 
-        y.left = z 
-        z.right = T2 
-  
-        # Update heights 
-        z.height = 1 + max(self.getHeight(z.left), 
-                         self.getHeight(z.right)) 
-        y.height = 1 + max(self.getHeight(y.left), 
-                         self.getHeight(y.right)) 
-  
-        # Return the new root 
-        return y 
-  
-    def rightRotate(self, z): 
-  
-        y = z.left 
-        T3 = y.right 
-  
-        # Perform rotation 
-        y.right = z 
-        z.left = T3 
-  
-        # Update heights 
-        z.height = 1 + max(self.getHeight(z.left), 
-                        self.getHeight(z.right)) 
-        y.height = 1 + max(self.getHeight(y.left), 
-                        self.getHeight(y.right)) 
-  
-        # Return the new root 
-        return y 
-  
-    def getHeight(self, root): 
-        if not root: 
+
+class AVL_Tree:
+    ''' AVL Tree (Self-balancing Tree) '''
+
+    def __init__(self, 
+                 assignment_number=0, 
+                 title='AVLTree', 
+                 descr='Self-balancing Tree'):
+                          
+        # Create bridges instance
+        self.bridges = Bridges(assignment_number, YOUR_USER_ID, 
+                               YOUR_API_KEY)
+        self.bridges.set_title(title)
+        self.bridges.set_description(descr)
+        
+        self.root = None
+        
+    def insert(self, key, data):
+        ''' Insert a node into Tree 
+        
+        :param key: We use key to determine where to insert node at
+        :param value: Any value to associate with the key
+        '''
+        
+        # If self.root does not hold anything yet then set self.root
+        if self.root == None:
+            self.root = Node(key, data)
+        else:
+            self._insert(self.root, key, data)
+            
+    def _insert(self, parent, key, data, grandparent=None): 
+        ''' Recursively insert & balance the tree 
+        
+        :param parent: The parent node we start from
+        :param key: We use key to determine where to insert node at
+        :param value: Any value to associate with the key
+        
+        :return: None
+        '''
+        # Insert
+        if parent == None:
+            return 
+            
+        if key == parent.key:
+            parent.append(data)
+            
+        elif key < parent.key:
+            if parent.left == None:
+                parent.left = Node(key, data)
+                parent.height = 1
+            else:
+                self._insert(parent.left, key, data, grandparent=parent)
+                    
+        else:
+            if parent.right == None:
+                parent.right = Node(key, data)
+                parent.height = 1
+            else:
+                self._insert(parent.right, key, data, grandparent=parent)
+        
+        # Set parent's height
+        parent.height = 1 + max( self.get_height(parent.left), self.get_height(parent.right) )
+                    
+        # Rotate if the difference between two children is 2 or more
+        
+        # Find balance factor
+        parent.balance_factor = self.get_height(parent.right) - self.get_height(parent.left) 
+        
+        if parent.balance_factor < -1 and parent.left.balance_factor < 0:
+            # Case 1
+            parent = self.rotate_right(grandparent, parent)
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor < -1 and parent.left.balance_factor > 0:
+            # Case 2
+            parent.left = self.rotate_left(parent, parent.left)
+            parent = self.rotate_right(grandparent, parent)
+            
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor > 1 and parent.right.balance_factor > 0:
+            # Case 3
+            parent = self.rotate_left(grandparent, parent)
+            if grandparent == None:
+                self.root = parent
+        elif parent.balance_factor > 1 and parent.right.balance_factor < 0:
+            # Case 4
+            parent.right = self.rotate_right(parent, parent.right)
+            parent = self.rotate_left(grandparent, parent)
+            
+            if grandparent == None:
+                self.root = parent 
+            
+    def rotate_right(self, grandparent, parent):
+        original_parent = parent
+        parent = parent.left
+        temp = parent.right
+        parent.right = original_parent
+        original_parent.left = temp
+        
+        self.set_height(original_parent, 1 + max(self.get_height(original_parent.left),
+                                            self.get_height(original_parent.right)))
+        self.set_height(parent, 1 + max(self.get_height(parent.left),
+                                   self.get_height(parent.right)))
+        
+        if grandparent != None:
+            if grandparent.left == original_parent: grandparent.left = parent
+            else: grandparent.right = parent      
+        return parent
+            
+    def rotate_left(self, grandparent, parent):
+        original_parent = parent
+        parent = parent.right
+        temp = parent.left
+        parent.left = original_parent
+        original_parent.right = temp
+        
+        self.set_height(original_parent, 1 + max(self.get_height(original_parent.left),
+                                            self.get_height(original_parent.right)))
+        self.set_height(parent, 1 + max(self.get_height(parent.left),
+                                   self.get_height(parent.right)))
+        
+        if grandparent != None:
+            if grandparent.left == original_parent: grandparent.left = parent
+            else: grandparent.right = parent
+        return parent
+        
+    def get_height(self, node):
+        if node == None:
             return 0
-  
-        return root.height 
-  
-    def getBalance(self, root): 
-        if not root: 
-            return 0
-  
-        return self.getHeight(root.left) - self.getHeight(root.right) 
-  
-    def preOrder(self, root): 
-  
-        if not root: 
+        else:
+            return node.height
+            
+    def get_balance_factor(self, node):
+        if node == None:
+            return -1
+        else:
+            return node.balance_factor
+            
+    def set_height(self, node, height):
+        if node == None:    
             return
-  
-        print("{0} ".format(root.key), end="") 
-        self.preOrder(root.left) 
-        self.preOrder(root.right) 
+        else:
+            node.height = height
+        
+    def level_order(self):
+        ''' level order traversal 
+        
+        Used to print the tree out, level by level 
+        '''
+        return self._level_order([self.root])
+        
+    def _level_order(self, current_level_nodes, more=None, result=''):
+        if current_level_nodes == []:
+            return result
 
-    def visualize(self, root):
-        self.bridges.set_data_structure(root)
+        next_level_nodes = []
+        result += '||'
+        for node in current_level_nodes:
+            result += '{} {} {} ,'.format(node.key, node.balance_factor, node.height)
+            if node.left != None:
+                next_level_nodes.append(node.left)
+            if node.right != None:
+                next_level_nodes.append(node.right)
+                
+        return self._level_order(next_level_nodes, result=result)
+        
+    def visualize(self):
+        ''' Upload the graph onto Bridges '''
+        self.bridges.set_data_structure(self.root)
         self.bridges.visualize()
-      
-
-
-def main():
-  # Driver program to test above function 
-  myTree = AVL_Tree() 
-  root = None
-    
-  root = myTree.insert(root, 10) 
-  root = myTree.insert(root, 20) 
-  root = myTree.insert(root, 30) 
-  root = myTree.insert(root, 40) 
-  root = myTree.insert(root, 50) 
-  root = myTree.insert(root, 25) 
-    
-  """The constructed AVL Tree would be 
-              30 
-            /  \ 
-          20   40 
-          /  \     \ 
-        10  25    50"""
-    
-  # Preorder Traversal 
-  print("Preorder traversal of the", 
-        "constructed AVL tree is") 
-  myTree.preOrder(root) 
-  print() 
-  myTree.visualize(root)
-
+        
+        
+# If run this file (e.g. python3 AVLTree.py)
+# this part of code will run 
+# 
+# Used to test our AVLTree       
 if __name__ == '__main__':
-  main()
+    # Case 1
+    tree1 = AVL_Tree()
+    tree1.insert(10, 'some')
+    tree1.insert(5, 'thing')
+    tree1.insert(3, 'cool')
+    print( tree1.level_order() ) # Should be ||5, ||3, 10
+    
+    # Case 2
+    tree2 = AVL_Tree()
+    tree2.insert(10, 'some')
+    tree2.insert(5, 'thing')
+    tree2.insert(8, 'cool')
+    print( tree2.level_order() ) # Should be ||8, ||10, 5
+    
+    # Case 3
+    tree3 = AVL_Tree()
+    tree3.insert(10, 'some')
+    tree3.insert(20, 'thing')
+    tree3.insert(30, 'cool')
+    print( tree3.level_order() ) # Should be ||20, ||10, 30
+    
+    # Case 4
+    tree4 = AVL_Tree()
+    tree4.insert(10, 'some')
+    tree4.insert(20, 'thing')
+    tree4.insert(15, 'cool')
+    print( tree4.level_order() ) # Should be ||15, ||10, 20
+    
+    # General Case
+    tree = AVL_Tree()
+    tree.insert(10, 'say')
+    tree.insert(5, 'some')
+    tree.insert(20, 'thing')
+    print( tree.level_order() ) # Should be ||10, ||5, 20
+    
+    tree.insert(3, 'cool')
+    tree.insert(2, 'that')
+    print( tree.level_order() ) # Should be ||10,||3, 20,||2, 5
+    
+    tree.insert(4, 'is')
+    print( tree.level_order() ) # Should be ||5, ||3, 10, ||2, 4, 20
+    
+    tree.insert(30, 'not')
+    print( tree.level_order() ) # Should be ||5, ||3, 20, ||2, 4, 10, 30 
+    
