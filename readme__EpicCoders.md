@@ -1,7 +1,9 @@
 # Project 3 Phase 2
 ### By: Sam Citron, Amanda Christy, Arsh Noor Amin, and Tung Tran
 
-For this phase, we started by creating our MinHeap along with our MinHeap visualization in Bridges. MinHeap had a sift up and sift down method, as we had to check to make sure the value in each internal node was smaller than or equal to the values in the children of that parent node. Our MinHeap class held Priority as a key and dispatch string as a Value, and contained a sorting method where it would sort the heap. In order to visualize our MinHeap, we used Bridges again. The following image is a visualization of the MinHeap in Bridges:
+For this phase, we started by creating our MinHeap along with our MinHeap visualization in Bridges. MinHeap had a sift up and sift down method, as we had to check to make sure the value in each internal node was smaller than or equal to the values in the children of that parent node. Our MinHeap class held Priority as a key and dispatch string as a Value, and contained a sorting method where it would sort the heap. In order to visualize our MinHeap, we used Bridges again. The following is a visualization of the MinHeap in Bridges:
+
+http://bridges-cs.herokuapp.com/assignments/3/tungtran
 
 Our old visualizations from Phase 1 were that we displayed our 2 AVL Trees in Bridges which had some labels but were not color coded. In this Phase, however, we updated these old AVL visualizations in Bridges so that they looked more organized and were easier to read as well as color coded, as shown here:
 
