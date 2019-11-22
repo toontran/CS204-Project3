@@ -6,6 +6,7 @@ For this phase, we started by creating our MinHeap along with our MinHeap visual
 Our old visualizations from Phase 1 were that we displayed our 2 AVL Trees in Bridges which had some labels but were not color coded. In this Phase, however, we updated these old AVL visualizations in Bridges so that they looked more organized and were easier to read as well as color coded, as shown here:
 
 http://bridges-cs.herokuapp.com/assignments/1/tungtran (crime tree)
+
 http://bridges-cs.herokuapp.com/assignments/0/tungtran (location tree)
 
 Another cool visualization that we added for creativity was that we used ipyleaflet in order to show the surrounding area of our dispatch coordinates on a realistic looking map of Chicago. ipyleaflet is an interactive map in the Jupyter notebook, and an example visualization of what a group of four coordinates would look like on the map is shown below:
