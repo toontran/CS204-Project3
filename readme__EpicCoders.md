@@ -3,10 +3,10 @@
 
 For this phase, we started by creating our MinHeap along with our MinHeap visualization in Bridges. MinHeap had a sift up and sift down method, as we had to check to make sure the value in each internal node was smaller than or equal to the values in the children of that parent node. Our MinHeap class held Priority as a key and dispatch string as a Value, and contained a sorting method where it would sort the heap. In order to visualize our MinHeap, we used Bridges again. The following image is a visualization of the MinHeap in Bridges:
 
-Our old visualizations from Phase 1 were that we displayed our 2 AVL Trees in Bridges which are shown here:
+Our old visualizations from Phase 1 were that we displayed our 2 AVL Trees in Bridges which had some labels but were not color coded. In this Phase, however, we updated these old AVL visualizations in Bridges so that they looked more organized and were easier to read as well as color coded, as shown here:
 
-
-In this Phase, however, we updated these old AVL visualizations in Bridges so that they looked more organized and were easier to read, as shown here:
+http://bridges-cs.herokuapp.com/assignments/1/tungtran (crime tree)
+http://bridges-cs.herokuapp.com/assignments/0/tungtran (location tree)
 
 Another cool visualization that we added for creativity was that we used ipyleaflet in order to show the surrounding area of our dispatch coordinates on a realistic looking map of Chicago. ipyleaflet is an interactive map in the Jupyter notebook, and an example visualization of what a group of four coordinates would look like on the map is shown below:
 
